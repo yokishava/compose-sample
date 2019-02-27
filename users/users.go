@@ -31,7 +31,7 @@ func SignIn(c *gin.Context) {
   } else {
     c.JSON(http.StatusOK, gin.H{
       "status": "posted",
-      "message": "success!!!!"
+      "message": "success!!!!",
     })
   }
 }
