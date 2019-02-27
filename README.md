@@ -31,3 +31,13 @@ display containers (includes stopped containers)
 ```
 docker ps -a
 ```
+
+docker-compose
+
+```
+docker-compose ps
+
+docker-compose up -d
+
+docker-compose down
+```
