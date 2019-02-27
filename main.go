@@ -3,7 +3,7 @@ package main
 import (
   "github.com/gin-gonic/gin"
   "net/http"
-  "github.com/wakashiyo/sampleCompose/users"
+  "github.com/wakashiyo/compose-sample/users"
 )
 
 func main() {
