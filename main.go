@@ -3,12 +3,20 @@ package main
 import (
   "github.com/gin-gonic/gin"
   "net/http"
+  "github.com/wakashiyo/sampleCompose/users"
 )
 
 func main() {
-  r := gin.Default()
-  r.GET("/", func(c *gin.Context) {
+  router := gin.Default()
+
+  router.GET("/", func(c *gin.Context) {
     c.String(http.StatusOK, "Hello Wolrd")
   })
-  r.Run(":9000")
+
+  v1 := router.Group("api/v1")
+  {
+    v1.GET("/user", users.SignIn)
+  }
+
+  router.Run(":9000")
 }
