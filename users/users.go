@@ -4,10 +4,10 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-xorm/xorm"
 
 	//mysql driver
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/go-xorm/xorm"
 )
 
 //Users user info
@@ -17,15 +17,16 @@ type Users struct {
 	Email string `xorm:"email"`
 }
 
-//SignIn user signin function
-func SignIn(c *gin.Context) {
-	//c.JSON(http.StatusOK, gin.H{
-	//  "status": "posted",
-	//  "message": "hello world!!!!!!!!!!",
-	//  "nick": "nicknicknick",
-	//})
+//Register register user info to db
+func Register(c *gin.Context) {
+
 	engine, _ := xorm.NewEngine("mysql", "test:test@tcp(db:3306)/test")
-	user := Users{Name: "yoshikawa", Email: "yoshikawa@mail.com"}
+
+	name := c.Query("name")
+	mail := c.Query("mail")
+
+	user := Users{Name: name, Email: mail}
+
 	_, err := engine.Insert(&user)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
@@ -34,8 +35,14 @@ func SignIn(c *gin.Context) {
 		})
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "posted",
-			"message": "success!!!!",
+			"status":  "success",
+			"message": "success regiter user",
 		})
 	}
+
+	// c.JSON(http.StatusOK, gin.H{
+	// 	"status": "success",
+	// 	"name":   user.Name,
+	// 	"mail":   user.Email,
+	// })
 }
