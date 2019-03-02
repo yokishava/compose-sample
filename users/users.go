@@ -28,21 +28,11 @@ func Register(c *gin.Context) {
 	user := Users{Name: name, Email: mail}
 
 	_, err := engine.Insert(&user)
-	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"status":  "error",
-			"message": err,
-		})
-	} else {
+	if err == nil {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "success",
 			"message": "success regiter user",
 		})
+		return
 	}
-
-	// c.JSON(http.StatusOK, gin.H{
-	// 	"status": "success",
-	// 	"name":   user.Name,
-	// 	"mail":   user.Email,
-	// })
 }
