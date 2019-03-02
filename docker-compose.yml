@@ -17,6 +17,13 @@ services:
   web:
     build: .
     ports:
-      - 8000:9000
+      - 9000:9000
     depends_on:
       - db
+
+  proxy:
+    build: nginx/.
+    ports:
+      - 8000:80
+    depends_on:
+      - web
